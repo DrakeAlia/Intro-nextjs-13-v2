@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
 import Header from "@component/components/Header";
+import { Suspense } from "react";
+import Loader from "@component/components/Loader";
 const inter = Inter({ subsets: ["latin"] });
 
 const getData = async () => {
@@ -14,7 +16,9 @@ export default async function Home() {
   const post = data.data.children[0].data.title;
   return (
     <main className={styles.main}>
-      <Header />
+      <Suspense fallback={<Loader />}>
+        <Header />
+      </Suspense>
       <div className={styles.description}>
         <h1>{post}</h1>
         <p>
